@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor Web en Java</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Prueba de Servidor HTTP en Java</h1>
+
+    <section>
+        <h2>Prueba GET</h2>
+        <input type="text" id="name" placeholder="Escribe tu nombre">
+        <button onclick="loadGetMsg()">Enviar</button>
+        <div id="getrespmsg" class="response"></div>
+    </section>
+
+    <section>
+        <h2>Prueba POST</h2>
+        <input type="text" id="postname" placeholder="Escribe tu nombre">
+        <button onclick="loadPostMsg()">Enviar</button>
+        <div id="postrespmsg" class="response"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
