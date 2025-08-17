@@ -1,23 +1,32 @@
-// Llamada GET asíncrona
-function loadGetMsg() {
-    let nameVar = document.getElementById("name").value;
-    fetch(`/hello?name=${encodeURIComponent(nameVar)}`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("getrespmsg").innerText = data;
-        })
-        .catch(error => console.error("Error en GET:", error));
+function addTask() {
+    let name = document.getElementById("taskName").value;
+    let time = document.getElementById("taskTime").value;
+    fetch(`/tasks?name=${encodeURIComponent(name)}&time=${encodeURIComponent(time)}`, {method: 'POST'})
+            .then(r => r.text()).then(t => {
+        alert(t);
+        listTasks();
+    });
 }
 
-// Llamada POST asíncrona
-function loadPostMsg() {
-    let nameVar = document.getElementById("postname").value;
-    fetch(`/hellopost?name=${encodeURIComponent(nameVar)}`, {
-        method: 'POST'
-    })
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById("postrespmsg").innerText = data;
-    })
-    .catch(error => console.error("Error en POST:", error));
+function listTasks() {
+    fetch("/tasks")
+            .then(r => r.json())
+            .then(data => {
+                let list = document.getElementById("tasksList");
+                list.innerHTML = "";
+                data.forEach(task => {
+                    let li = document.createElement("li");
+                    li.textContent = `${task.name} - ${task.time}`;
+                    li.onclick = () => deleteTask(task.name, task.time);
+                    list.appendChild(li);
+                });
+            });
+}
+
+function deleteTask(name, time) {
+    fetch(`/tasks?name=${encodeURIComponent(name)}&time=${encodeURIComponent(time)}`, {method: 'DELETE'})
+            .then(r => r.text()).then(t => {
+        alert(t);
+        listTasks();
+    });
 }

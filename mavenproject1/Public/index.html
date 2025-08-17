@@ -2,24 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Servidor Web en Java</title>
+    <title>Agregador de Tareas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Prueba de Servidor HTTP en Java</h1>
+    <h1>Gestión de Tareas</h1>
 
     <section>
-        <h2>Prueba GET</h2>
-        <input type="text" id="name" placeholder="Escribe tu nombre">
-        <button onclick="loadGetMsg()">Enviar</button>
-        <div id="getrespmsg" class="response"></div>
-    </section>
+        <input type="text" id="taskName" placeholder="Escribe una tarea">
+        <input type="time" id="taskTime">
+        <button onclick="addTask()">Agregar</button>
+        <button onclick="listTasks()">Listar</button>
 
-    <section>
-        <h2>Prueba POST</h2>
-        <input type="text" id="postname" placeholder="Escribe tu nombre">
-        <button onclick="loadPostMsg()">Enviar</button>
-        <div id="postrespmsg" class="response"></div>
+        <ul id="tasksList" class="response"></ul>
     </section>
 
     <script src="script.js"></script>
