@@ -8,7 +8,7 @@ import com.google.gson.Gson; // Usa Gson (añádelo a tu pom.xml si usas Maven)
 
 public class HttpServer {
 
-    // Lista de tareas (cada tarea es un Map con "name" y "time")
+   
     private static final List<Map<String, String>> tasks = new ArrayList<>();
     private static final Gson gson = new Gson();
 

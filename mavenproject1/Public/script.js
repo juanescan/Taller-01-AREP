@@ -16,7 +16,7 @@ function listTasks() {
             list.innerHTML = "";
             data.forEach(task => {
                 let li = document.createElement("li");
-                li.textContent = `${task.name} - [${task.type}]`;
+                li.textContent = `${task.name} - ${task.type}`;
                 li.onclick = () => deleteTask(task.name, task.type);
                 list.appendChild(li);
             });
