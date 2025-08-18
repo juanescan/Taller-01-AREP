@@ -13,8 +13,10 @@ h1 {
 }
 
 section {
-    margin-bottom: 30px;
-    padding: 15px;
+    margin: 30px auto;          /* centrado horizontal */
+    padding: 20px;
+    width: 400px;               /* menos ancho */
+    height: 300px;              /* más alto */
     background: white;  
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
