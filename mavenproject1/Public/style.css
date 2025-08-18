@@ -15,13 +15,13 @@ h1 {
 section {
     margin-bottom: 30px;
     padding: 15px;
-    background: white;   /* Fondo blanco */
+    background: white;  
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    color: rgb(167, 85, 85); /* Texto negro para contraste */
+    gap: 10px; 
+    color: black; 
 }
 
 
