@@ -57,11 +57,11 @@ El sistema está compuesto por dos capas principales:
 
 - script.js: comunicación con el servidor usando fetch() (asíncrono).
 
-- La lista de tareas se actualiza dinámicamente en la página.}
+- La lista de tareas se actualiza dinámicamente en la página.
 
 ## Pruebas
  
 ## APP
 
 ## Authors 
-- Juan Esteban Cancelado Sanchez 
+- Juan Esteban Cancelado Sanchez - *AREP* *Taller 1* - [juanescan](https://github.com/juanescan)
