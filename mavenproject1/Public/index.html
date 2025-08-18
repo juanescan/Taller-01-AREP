@@ -9,11 +9,22 @@
     <h1>Gestión de Tareas</h1>
 
     <section>
+        <!-- Nombre de la tarea -->
         <input type="text" id="taskName" placeholder="Escribe una tarea">
-        <input type="time" id="taskTime">
+
+        <!-- Selección del tipo -->
+        <select id="taskType">
+            <option value="casa">Casa</option>
+            <option value="universidad">Universidad</option>
+            <option value="trabajo">Trabajo</option>
+            <option value="otro">Otro</option>
+        </select>
+
+        <!-- Botones -->
         <button onclick="addTask()">Agregar</button>
         <button onclick="listTasks()">Listar</button>
 
+        <!-- Lista de tareas -->
         <ul id="tasksList" class="response"></ul>
     </section>
 

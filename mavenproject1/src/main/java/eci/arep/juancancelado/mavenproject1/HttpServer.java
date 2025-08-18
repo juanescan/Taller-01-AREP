@@ -49,40 +49,43 @@ public class HttpServer {
     }
 
     private static void handleTasks(OutputStream out, String method, String path) throws IOException {
-        Map<String, String> params = getParams(path);
-        String name = params.getOrDefault("name", "Anon");
-        String time = params.getOrDefault("time", "");
+    Map<String, String> params = getParams(path);
+    String name = params.getOrDefault("name", "Anon");
+    String type = params.getOrDefault("type", "otro"); // ahora usamos "type"
 
-        switch (method.toUpperCase()) {
-            case "GET":
-                sendResponse(out, "application/json", gson.toJson(tasks));
-                break;
+    switch (method.toUpperCase()) {
+        case "GET":
+            sendResponse(out, "application/json", gson.toJson(tasks));
+            break;
 
-            case "POST":
-                if (!name.equals("Anon")) {
-                    Map<String, String> task = new HashMap<>();
-                    task.put("name", name);
-                    task.put("time", time);
-                    tasks.add(task);
-                    sendResponse(out, "text/plain", "Tarea agregada: " + name + " a las " + time);
-                } else {
-                    sendResponse(out, "text/plain", "Tarea inválida.");
-                }
-                break;
+        case "POST":
+            if (!name.equals("Anon")) {
+                Map<String, String> task = new HashMap<>();
+                task.put("name", name);
+                task.put("type", type); // guardamos tipo
+                tasks.add(task);
+                sendResponse(out, "text/plain", "Tarea agregada: " + name + " (" + type + ")");
+            } else {
+                sendResponse(out, "text/plain", "Tarea inválida.");
+            }
+            break;
 
-            case "DELETE":
-                boolean removed = tasks.removeIf(t -> t.get("name").equals(name) && t.get("time").equals(time));
-                if (removed) {
-                    sendResponse(out, "text/plain", "Tarea eliminada: " + name);
-                } else {
-                    sendResponse(out, "text/plain", "Tarea no encontrada: " + name);
-                }
-                break;
+        case "DELETE":
+            boolean removed = tasks.removeIf(t -> 
+                t.get("name").equals(name) && t.get("type").equals(type)
+            );
+            if (removed) {
+                sendResponse(out, "text/plain", "Tarea eliminada: " + name + " (" + type + ")");
+            } else {
+                sendResponse(out, "text/plain", "Tarea no encontrada: " + name);
+            }
+            break;
 
-            default:
-                sendResponse(out, "text/plain", "Método no soportado: " + method);
-        }
+        default:
+            sendResponse(out, "text/plain", "Método no soportado: " + method);
     }
+}
+
 
     private static Map<String, String> getParams(String path) {
         Map<String, String> params = new HashMap<>();
