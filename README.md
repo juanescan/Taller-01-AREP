@@ -61,7 +61,19 @@ El sistema está compuesto por dos capas principales:
 
 ## Pruebas
  
+ ![imagenes](/imagenes/prueba1.png)
+
+![imagenes](/imagenes/prueba2.png)
+
 ## APP
+
+![App](/imagenes/APP1.png)
+
+![App](/imagenes/APP2.png)
+
+![App](/imagenes/APP3.png)
+
+![App](/imagenes/APP4.png)
 
 ## Authors 
 - Juan Esteban Cancelado Sanchez - *AREP* *Taller 1* - [juanescan](https://github.com/juanescan)

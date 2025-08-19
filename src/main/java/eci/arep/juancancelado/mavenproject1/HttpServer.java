@@ -8,7 +8,6 @@ import com.google.gson.Gson; // Usa Gson (añádelo a tu pom.xml si usas Maven)
 
 public class HttpServer {
 
-   
     private static final List<Map<String, String>> tasks = new ArrayList<>();
     private static final Gson gson = new Gson();
 
@@ -29,14 +28,17 @@ public class HttpServer {
         OutputStream out = clientSocket.getOutputStream();
 
         String inputLine = in.readLine();
-        if (inputLine == null || inputLine.isEmpty()) return;
+        if (inputLine == null || inputLine.isEmpty()) {
+            return;
+        }
 
         System.out.println("Solicitud: " + inputLine);
         String[] requestParts = inputLine.split(" ");
         String method = requestParts[0];
         String path = requestParts[1];
 
-        while ((in.readLine()) != null && !in.ready()) {}
+        while ((in.readLine()) != null && !in.ready()) {
+        }
 
         if (path.startsWith("/tasks")) {
             handleTasks(out, method, path);
@@ -49,43 +51,47 @@ public class HttpServer {
     }
 
     private static void handleTasks(OutputStream out, String method, String path) throws IOException {
-    Map<String, String> params = getParams(path);
-    String name = params.getOrDefault("name", "Anon");
-    String type = params.getOrDefault("type", "otro"); // ahora usamos "type"
+        Map<String, String> params = getParams(path);
+        String name = params.getOrDefault("name", "Anon");
+        String type = params.getOrDefault("type", "otro"); // ahora usamos "type"
 
-    switch (method.toUpperCase()) {
-        case "GET":
-            sendResponse(out, "application/json", gson.toJson(tasks));
-            break;
+        switch (method.toUpperCase()) {
+            case "GET":
+                sendResponse(out, "application/json", gson.toJson(tasks));
+                break;
 
-        case "POST":
-            if (!name.equals("Anon")) {
-                Map<String, String> task = new HashMap<>();
-                task.put("name", name);
-                task.put("type", type); // guardamos tipo
-                tasks.add(task);
-                sendResponse(out, "text/plain", "Tarea agregada: " + name + " (" + type + ")");
-            } else {
-                sendResponse(out, "text/plain", "Tarea inválida.");
-            }
-            break;
+            case "POST":
+                if (!name.equals("Anon")) {
+                    Map<String, String> task = new HashMap<>();
+                    task.put("name", name);
+                    task.put("type", type); // guardamos tipo
+                    tasks.add(task);
+                    sendResponse(out, "text/plain", "Tarea agregada: " + name + " (" + type + ")");
+                } else {
+                    sendResponse(out, "text/plain", "Tarea inválida.");
+                }
+                break;
 
-        case "DELETE":
-            boolean removed = tasks.removeIf(t -> 
-                t.get("name").equals(name) && t.get("type").equals(type)
-            );
-            if (removed) {
-                sendResponse(out, "text/plain", "Tarea eliminada: " + name + " (" + type + ")");
-            } else {
-                sendResponse(out, "text/plain", "Tarea no encontrada: " + name);
-            }
-            break;
+            case "DELETE":
+                boolean removed = tasks.removeIf(t
+                        -> t.get("name").equals(name) && t.get("type").equals(type)
+                );
+                if (removed) {
+                    sendResponse(out, "text/plain", "Tarea eliminada: " + name + " (" + type + ")");
+                } else {
+                    sendResponse(out, "text/plain", "Tarea no encontrada: " + name);
+                }
+                break;
+                
+            case "RESET":
+                tasks.clear();
+                sendResponse(out, "text/plain", "Lista reiniciada");
+                break;
 
-        default:
-            sendResponse(out, "text/plain", "Método no soportado: " + method);
+            default:
+                sendResponse(out, "text/plain", "Método no soportado: " + method);
+        }
     }
-}
-
 
     private static Map<String, String> getParams(String path) {
         Map<String, String> params = new HashMap<>();
@@ -102,7 +108,9 @@ public class HttpServer {
     }
 
     private static void serveStaticFile(OutputStream out, String path) throws IOException {
-        if (path.equals("/")) path = "/index.html";
+        if (path.equals("/")) {
+            path = "/index.html";
+        }
         File file = new File("public" + path);
         if (file.exists() && !file.isDirectory()) {
             String contentType = guessContentType(file.getName());
