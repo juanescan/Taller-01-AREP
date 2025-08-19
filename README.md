@@ -73,7 +73,15 @@ El sistema está compuesto por dos capas principales:
 
 ![App](/imagenes/APP3.png)
 
-![App](/imagenes/APP4.png)
+![App](/imagenes/APP4.png) 
+
+![App](/imagenes/APP5.png) 
+
+## Built With
+
+- Java SE - Lenguaje de programación
+
+- Maven - Herramienta de gestión de dependencias y construcción
 
 ## Authors 
 - Juan Esteban Cancelado Sanchez - *AREP* *Taller 1* - [juanescan](https://github.com/juanescan)
